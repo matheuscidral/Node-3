@@ -1,25 +1,29 @@
-const nomes = Array("Bénado", "Pédrini", "Réfê");
+const nomes = new Array();
+const Pessoa = require("../models/exercicio.js");
 
-class RepositoryExercicio {
-  PegarUm(index) {
-    return nomes[index];
-  }
-
-  PegarTodos() {
-    return nomes;
+class RepostiorieExercicios {
+  async GetNome(id) {
+    return Pessoa.findOne({
+      where: { id },
+    });
   }
 
   Add(nome) {
+    console.log(`NOME: ${nome}`);
     nomes.push(nome);
   }
 
-  Alterar(index) {
-    nomes[index] = nome;
+  GetNomes() {
+    return nomes;
   }
 
-  Deletar(index) {
-    nomes.splice(index, 1);
+  Update(nome, id) {
+    nomes[id] = nome;
+  }
+
+  Delete(id) {
+    nomes.splice(id, 1);
   }
 }
 
-module.exports = RepositoryExercicio;
+module.exports = RepostiorieExercicios;

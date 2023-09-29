@@ -1,31 +1,22 @@
 const { describe, expect, it } = require("@jest/globals");
-const ServicoExercicio = require("../src/services/ex");
+const ServiceExercicios = require("../src/services/exercicio.js");
 
-describe("Testes do primeiro exercício", () => {
-  const servico = new ServicoExercicio();
+describe("Testes dos Exercicios", () => {
+  const service = new ServiceExercicios();
 
   beforeAll(async () => {
-    console.info("Iniciando TDD com jest!");
+    console.info("Iniciando TDD com Jest!");
   });
 
   afterAll(() => {
-    console.info("Encerrados os testes");
+    console.info("Testes Encerrados!");
   });
 
   it("Should add a name", () => {
-    const qtde = servico.PegarTodos().length;
-    servico.Adicionar("João");
-    const qtdeAfter = servico.PegarTodos().length;
+    const valueBefore = service.GetNomes().length;
+    service.Add("João");
+    const valueAfter = service.GetNomes().length;
 
-    expect(qtdeAfter).toBe(qtde + 1);
-  });
-
-  it("Should add a name", () => {
-    const nome = "Lucas";
-    servico.Adicionar(nome);
-
-    const addedNome = servico.PegarUm(servico.PegarTodos().length - 1);
-    console.log(addedNome);
-    expect(nome).toBe(addedNome);
+    expect(valueAfter).toBe(valueBefore + 1);
   });
 });

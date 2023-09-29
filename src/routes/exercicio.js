@@ -1,13 +1,13 @@
 const express = require("express");
-const ControllerExercicio = require("../controllers/exercicios");
+const ControllerExercicios = require("../controllers/exercicio.js");
 
-const controller = new ControllerExercicio();
+const controller = new ControllerExercicios();
 const router = express.Router();
 
-router.get("/api/nome/:index", controller.PegarUm);
-router.get("/api/nomes", controller.PegarTodos);
-router.post("/api/nome", controller.Adicionar);
-router.put("/api/nome/:index", controller.Alterar);
-router.delete("/api/nome/:index", controller.Deletar);
+router.get("/api/nome/:id", controller.GetNome);
+router.post("/api/nome", controller.Add);
+router.post("/api/nomes", controller.GetNomes);
+router.put("/api/nome/:id", controller.Update);
+router.delete("/api/nome/:id", controller.Delete);
 
 module.exports = router;

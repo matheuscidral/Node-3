@@ -1,56 +1,76 @@
-const ServicoExercicio = require("../services/ex");
+const ServiceExercicios = require("../services/exercicio.js");
+const service = new ServiceExercicios();
 
-const servico = new ServicoExercicio();
-
-class ControllerExercicio {
-  PegarUm(req, res) {
+class ControllerExercicios {
+  async GetNome(req, res) {
     try {
-      const index = req.Params.index;
-
-      const result = servico.PegarUm(index);
+      const resultado = await service.GetNome(req.params.id);
       res.status(200).json({
-        nome: result,
+        nomes: resultado,
       });
     } catch (error) {
-      res.status(500).json({ message: "Erro ao pegar nome" });
+      console.log(error);
+      res.status(500).json({
+        message: error,
+      });
     }
   }
 
-  PegarTodos(req, res) {
+  Add(req, res) {
     try {
-      const result = servico.PegarTodos();
-
-      res.status(201).json({
-        nomes: result,
+      const resultado = service.Add(req.body.nome);
+      res.status(200).json({
+        nomes: resultado,
       });
     } catch (error) {
-      res.status(500).json({ message: "Erro ao listar nomes" });
+      console.log(error);
+      res.status(500).json({
+        message: error,
+      });
     }
   }
 
-  Adicionar(req, res) {
+  GetNomes(_, res) {
     try {
-      const nome = req.body.nome;
-
-      servico.Adicionar(nome);
-      res.status(201).json({ message: "Adicionado com sucesso!" });
+      const resultado = service.GetNomes();
+      res.status(200).json({
+        nomes: resultado,
+      });
     } catch (error) {
-      res.status(500).json({ message: "Erro ao adicionar" });
+      console.log(error);
+      res.status(500).json({
+        message: error,
+      });
     }
   }
 
-  Alterar(req, res) {
+  Update(req, res) {
     try {
-      const index = req.params.index;
-      const nome = req.body.nome;
-
-      servico.Alterar(index, nome);
-
-      res.status(200).json({ message: "Alterado com sucesso!" });
+      const resultado = service.Update(req.body.nome, req.params.id);
+      res.status(200).json({
+        nomes: resultado,
+      });
     } catch (error) {
-      res.status(500).json({ message: "Erro ao alterar" });
+      console.log(error);
+      res.status(500).json({
+        message: error,
+      });
+    }
+  }
+
+  Delete(req, res) {
+    try {
+      const resultado = service.Delete(req.params.id);
+      res.status(200).json({
+        nomes: resultado,
+      });
+    } catch {
+      console.log(error);
+      res.status(500).json({
+        message: error,
+      });
     }
   }
 }
 
-module.exports = ControllerExercicio;
+module.exports = ControllerExercicios;
