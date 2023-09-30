@@ -6,7 +6,7 @@ class ControllerExercicios {
     try {
       const resultado = await service.GetNome(req.params.id);
       res.status(200).json({
-        nomes: resultado,
+        pessoa: resultado,
       });
     } catch (error) {
       console.log(error);
@@ -16,11 +16,11 @@ class ControllerExercicios {
     }
   }
 
-  Add(req, res) {
+  async Add(req, res) {
     try {
-      const resultado = service.Add(req.body.nome);
-      res.status(200).json({
-        nomes: resultado,
+      const resultado = await service.Add(req.body.pessoa);
+      res.status(201).json({
+        pessoa: resultado,
       });
     } catch (error) {
       console.log(error);
@@ -30,11 +30,11 @@ class ControllerExercicios {
     }
   }
 
-  GetNomes(_, res) {
+  async GetNomes(_, res) {
     try {
-      const resultado = service.GetNomes();
+      const resultado = await service.GetNomes();
       res.status(200).json({
-        nomes: resultado,
+        pessoa: resultado,
       });
     } catch (error) {
       console.log(error);
@@ -44,11 +44,11 @@ class ControllerExercicios {
     }
   }
 
-  Update(req, res) {
+  async Update(req, res) {
     try {
-      const resultado = service.Update(req.body.nome, req.params.id);
+      const resultado = await service.Update(req.body.id, req.params.pessoa);
       res.status(200).json({
-        nomes: resultado,
+        pessoa: resultado,
       });
     } catch (error) {
       console.log(error);
@@ -58,11 +58,11 @@ class ControllerExercicios {
     }
   }
 
-  Delete(req, res) {
+  async Delete(req, res) {
     try {
-      const resultado = service.Delete(req.params.id);
-      res.status(200).json({
-        nomes: resultado,
+      const resultado = await service.Delete(req.params.id);
+      res.status(204).json({
+        pessoa: resultado,
       });
     } catch {
       console.log(error);

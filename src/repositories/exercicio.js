@@ -1,4 +1,3 @@
-const nomes = new Array();
 const Pessoa = require("../models/exercicio.js");
 
 class RepostiorieExercicios {
@@ -8,21 +7,24 @@ class RepostiorieExercicios {
     });
   }
 
-  Add(nome) {
-    console.log(`NOME: ${nome}`);
-    nomes.push(nome);
+  async GetNomes() {
+    return Pessoa.findAll();
   }
 
-  GetNomes() {
-    return nomes;
+  async Add(pessoa) {
+    return Pessoa.create(pessoa);
   }
 
-  Update(nome, id) {
-    nomes[id] = nome;
+  async Update(pessoa) {
+    return Pessoa.update(pessoa, {
+      where: { id },
+    });
   }
 
-  Delete(id) {
-    nomes.splice(id, 1);
+  async Delete(id) {
+    return Pessoa.destroy({
+      where: { id },
+    });
   }
 }
 

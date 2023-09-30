@@ -8,7 +8,7 @@ sequelize
     console.log("Conectado ao banco com sucesso!");
   })
   .catch((error) => {
-    console.log("Não conectou ao banco de dados!");
+    console.log("Não conectou ao banco de dados!")
   });
 
 module.exports = sequelize;

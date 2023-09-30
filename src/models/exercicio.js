@@ -6,6 +6,7 @@ const Pessoa = sequelize.define(
   {
     id: {
       primaryKey: true,
+      autoIncrement: true,
       type: DataTypes.INTEGER,
     },
     nome: {
@@ -21,8 +22,8 @@ const Pessoa = sequelize.define(
     },
   },
   {
-    createdAt: false,
-    updatedAt: false,
+    createdAt: true,
+    updatedAt: true,
   }
 );
 

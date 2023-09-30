@@ -1,3 +1,4 @@
+const Pessoa = require("../models/exercicio.js");
 const RepostiorieExercicios = require("../repositories/exercicio.js");
 const repositorie = new RepostiorieExercicios();
 
@@ -6,32 +7,47 @@ class ServiceExercicios {
     return repositorie.GetNome(id);
   }
 
-  Add(nome) {
-    if (!nome) {
-      throw new Error("Parâmetro inválido");
-    }
-
-    repositorie.Add(nome);
-  }
-
-  GetNomes() {
+  async GetNomes() {
     return repositorie.GetNomes();
   }
 
-  Update(nome, id) {
-    if (!nome || isNaN(id)) {
-      throw new Error("Parâmetro inválido");
+  async Add(pessoa) {
+    if (!pessoa) {
+      throw new Error("Nenhuma pessoa encontrada!");
+    } else if (!pessoa.nome) {
+      throw new Error("Nenhum nome encontrado!");
+    } else if (!pessoa.email) {
+      throw new Error("Nenhum email encontrado!");
+    } else if (!pessoa.senha) {
+      throw new Error("Nenhuma senha encontrado!");
     }
 
-    repositorie.Update(nome, id);
+    return repositorie.Add(pessoa);
   }
 
-  Delete(id) {
-    if (isNaN(id)) {
-      throw new Error("Parâmetro inválido");
+  async Update(id, pessoa) {
+    if(!id) {
+      throw new Error("Nenhum identificador encontrado!");
+    }
+    if (!pessoa) {
+      throw new Error("Nenhuma pessoa encontrada!");
+    } else if (!pessoa.nome) {
+      throw new Error("Nenhum nome encontrado!");
+    } else if (!pessoa.email) {
+      throw new Error("Nenhum email encontrado!");
+    } else if (!pessoa.senha) {
+      throw new Error("Nenhuma senha encontrado!");
     }
 
-    repositorie.Delete(id);
+    return repositorie.Update(id, pessoa);
+  }
+
+  async Delete(id) {
+    if (id < 0 || isNaN(id) || id > this.PegarTodos().length) {
+      throw new Error("Favor preencher corretamente o id");
+    }
+
+    return repositorie.Delete(id);
   }
 }
 
