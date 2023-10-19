@@ -5,10 +5,10 @@ const sequelize = new Sequelize(development);
 sequelize
   .sync()
   .then(() => {
-    console.log("Conectado ao banco com sucesso!");
+    console.log("Conexão com o banco de dados estabelecida com sucesso.");
   })
   .catch((error) => {
-    console.log("Não conectou ao banco de dados!")
+    console.error("Erro ao conectar ao banco de dados:", error);
   });
 
 module.exports = sequelize;
