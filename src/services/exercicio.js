@@ -7,6 +7,10 @@ class ServiceExercicios {
     return repositorie.GetNome(id);
   }
 
+  async getEmail(email) {
+    return repositorie.getEmail(email);
+  }
+
   async GetNomes() {
     return repositorie.GetNomes();
   }
@@ -26,7 +30,7 @@ class ServiceExercicios {
   }
 
   async Update(id, pessoa) {
-    if(!id) {
+    if (!id) {
       throw new Error("Nenhum identificador encontrado!");
     }
     if (!pessoa) {

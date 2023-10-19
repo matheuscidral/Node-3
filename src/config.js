@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 module.exports = {
   development: {
     username: "root",
@@ -5,5 +7,4 @@ module.exports = {
     database: "exemplo",
     host: "localhost",
     dialect: "mysql",
-  },
-};
+    

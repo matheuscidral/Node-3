@@ -1,4 +1,5 @@
 const Pessoa = require("../models/exercicio.js");
+const bcrypt = require("bcrypt");
 
 class RepostiorieExercicios {
   async GetNome(id) {
@@ -7,11 +8,27 @@ class RepostiorieExercicios {
     });
   }
 
+  async GetEmail(email) {
+    return Pessoa.findOne({
+      where: { email },
+    });
+  }
+
   async GetNomes() {
     return Pessoa.findAll();
   }
 
   async Add(pessoa) {
+    const hashSenha = bcrypt.hash(pessoa.senha, 10);
+
+    const result = await Pessoa.create(
+      {
+        ...pessoa,
+        senha: hashSenha,
+      },
+      { transaction }
+    );
+
     return Pessoa.create(pessoa);
   }
 

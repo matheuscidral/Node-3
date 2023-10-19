@@ -1,7 +1,38 @@
 const ServiceExercicios = require("../services/exercicio.js");
 const service = new ServiceExercicios();
+const bcrypt = require("bcrypt");
+const config = require("../config.js");
 
 class ControllerExercicios {
+  async Login(req, res) {
+    const { email, senha } = req.body;
+
+    const { dataValues: pessoa } = await service.GetEmail(email);
+
+    if (!email || !senha) {
+      return res.status(401).json({ message: "Email ou senha inválido" });
+    }
+    if (!pessoa) {
+      return res.status(401).json({ message: "Email ou senha inválido" });
+    }
+    if (!(await bcrypt.compare(senha, pessoa.senha))) {
+      pessoa.senha == senha;
+    }
+
+    const token = jwt.sign(
+      {
+        id: pessoa.id,
+        email: pessoa.email,
+        nome: pessoa.nome,
+      },
+      config.secret
+    );
+
+    res.json({
+      token: "",
+    });
+  }
+
   async GetNome(req, res) {
     try {
       const resultado = await service.GetNome(req.params.id);
